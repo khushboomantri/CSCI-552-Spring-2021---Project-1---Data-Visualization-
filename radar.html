@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/ >
+		<title>Smoothed Radar Chart</title>
+
+		<!-- Google fonts -->
+		<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+
+		<!-- D3.js -->
+		<script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+		<script src="https://d3js.org/d3-path.v1.min.js" charset="utf-8"></script>
+		<script src="radarChart.js" charset="utf-8"></script>
+		<style>
+			body {
+				font-family: 'Open Sans', sans-serif;
+				font-size: 11px;
+				font-weight: 300;
+				fill: #242424;
+				text-align: center;
+				text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
+				cursor: default;
+			}
+
+			.legend {
+				font-family: 'Raleway', sans-serif;
+				fill: #333333;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="radarChart2" style="display: inline-flex;"></div>
+		<script>
+			//////////////////////////////////////////////////////////////
+			//////////////////////// Set-Up //////////////////////////////
+			//////////////////////////////////////////////////////////////
+
+			var margin = { top: 50, right: 80, bottom: 50, left: 80 },
+				width = Math.min(400, window.innerWidth / 4) - margin.left - margin.right,
+				height = Math.min(width, window.innerHeight - margin.top - margin.bottom);
+
+			//////////////////////////////////////////////////////////////
+			////////////////////////// Data //////////////////////////////
+			//////////////////////////////////////////////////////////////
+
+			var data = [
+				{ name: 'Afghanistan',
+					axes: [
+						{axis: 'Employment', value: 42},
+						{axis: 'Sexratio', value: 20},
+						{axis: 'Urbanization', value: 60},
+						{axis: 'Population', value: 26},
+						{axis: 'Incomeperperson', value: 35},
+						{axis: 'Administration', value: 20}
+					],
+         color: '#DAF7A6'
+				},
+				{ name: 'Albania',
+                axes: [
+						{axis: 'Employment', value: 30},
+						{axis: 'Sexratio', value: 25},
+						{axis: 'Urbanization', value: 89},
+						{axis: 'Population', value: 26},
+						{axis: 'Incomeperperson', value: 30},
+						{axis: 'Administration', value: 28}
+					],
+         color: '#FFC300'
+				},
+        { name: 'Algeria',
+        axes: [
+						{axis: 'Employment', value: 40},
+						{axis: 'Sexratio', value: 50},
+						{axis: 'Urbanization', value: 64},
+						{axis: 'Population', value: 46},
+						{axis: 'Incomeperperson', value: 55},
+						{axis: 'Administration', value: 22}
+					],
+         color: '#FF5733'
+				},
+                { name: 'Bahrain',
+        axes: [
+						{axis: 'Employment', value: 10},
+						{axis: 'Sexratio', value: 20},
+						{axis: 'Urbanization', value: 30},
+						{axis: 'Population', value: 40},
+						{axis: 'Incomeperperson', value: 50},
+						{axis: 'Administration', value: 60}
+					],
+         color: '#C70039'
+				},
+                { name: 'Belgium',
+        axes: [
+						{axis: 'Employment', value: 15},
+						{axis: 'Sexratio', value: 30},
+						{axis: 'Urbanization', value: 20},
+						{axis: 'Population', value: 46},
+						{axis: 'Incomeperperson', value: 65},
+						{axis: 'Administration', value: 80}
+					],
+         color: '#737373 '
+				},
+                { name: 'Cameroon',
+        axes: [
+						{axis: 'Employment', value: 30},
+						{axis: 'Sexratio', value: 10},
+						{axis: 'Urbanization', value: 69},
+						{axis: 'Population', value: 46},
+						{axis: 'Incomeperperson', value: 74},
+						{axis: 'Administration', value: 60}
+					],
+         color: '#581845'
+				}
+			];
+      
+ //     console.log(data[0].color);
+
+			//////////////////////////////////////////////////////////////
+			////// First example /////////////////////////////////////////
+      ///// (not so much options) //////////////////////////////////
+			//////////////////////////////////////////////////////////////
+			var radarChartOptions = {
+			  w: 290,
+			  h: 350,
+			  margin: margin,
+			  levels: 5,
+			  roundStrokes: true,
+				color: d3.scaleOrdinal(d3.schemeCategory20),
+				format: '.0f'
+			};
+
+			// Draw the chart, get a reference the created svg element :
+			let svg_radar1 = RadarChart(".radarChart", data, radarChartOptions);
+
+			//////////////////////////////////////////////////////////////
+			///// Second example /////////////////////////////////////////
+			///// Chart legend, custom color, custom unit, etc. //////////
+			//////////////////////////////////////////////////////////////
+			var radarChartOptions2 = {
+			  w: 290,
+			  h: 350,
+			  margin: margin,
+			  maxValue: 60,
+			  levels: 6,
+			  roundStrokes: false,
+			  color: d3.scaleOrdinal(d3.schemeCategory10),
+				format: '.0f',
+				legend: { title: 'Organization XYZ', translateX: 100, translateY: 40 },
+				unit: '$'
+			};
+
+			// Draw the chart, get a reference the created svg element :
+			let svg_radar2 = RadarChart(".radarChart2", data, radarChartOptions2);
+		</script>
+	</body>
+</html>
